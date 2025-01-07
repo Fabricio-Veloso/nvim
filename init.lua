@@ -1,9 +1,8 @@
 -- Requiers
 require 'core.options'
 require 'core.keymaps'
+
 -- NOTE:  lazy set-up
-
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -15,19 +14,13 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	{
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
-},
-
-{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
-
+  require 'plugins.neotree',
+  require 'plugins.lualine',
+  require 'plugins.nerdy',   
+  require 'plugins.treesitter',        
+  require 'plugins.moonfly',
+  require 'plugins.telescope'
 })
--- Lua initialization file
+
+ -- seting moonflw theme
 vim.cmd [[colorscheme moonfly]]
