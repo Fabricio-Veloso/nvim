@@ -20,7 +20,11 @@ require('lazy').setup {
   require 'plugins.telescope',
   require 'plugins.lsp',
   require 'plugins.autocompletion',
+  require 'plugins.alpha',
+  require 'plugins.indent-blankLine',
   require 'plugins.autoformatting',
+  require 'plugins.which-key',
+  require 'plugins.comment',
 }
 
 -- seting moonflw theme
