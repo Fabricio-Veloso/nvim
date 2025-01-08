@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+require('lazy').setup {
   require 'plugins.neotree',
   require 'plugins.lualine',
   require 'plugins.nerdy',
@@ -19,9 +19,9 @@ require('lazy').setup({
   require 'plugins.moonfly',
   require 'plugins.telescope',
   require 'plugins.lsp',
-  require 'plugins.autocompletion'
-})
+  require 'plugins.autocompletion',
+  require 'plugins.autoformatting',
+}
 
- -- seting moonflw theme
+-- seting moonflw theme
 vim.cmd [[colorscheme moonfly]]
-
