@@ -1,7 +1,5 @@
--- Requiers
 require 'core.options'
 require 'core.keymaps'
-
 -- NOTE:  lazy set-up
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -16,11 +14,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   require 'plugins.neotree',
   require 'plugins.lualine',
-  require 'plugins.nerdy',   
-  require 'plugins.treesitter',        
+  require 'plugins.nerdy',
+  require 'plugins.treesitter',
   require 'plugins.moonfly',
-  require 'plugins.telescope'
+  require 'plugins.telescope',
+  require 'plugins.lsp',
+  require 'plugins.autocompletion'
 })
 
  -- seting moonflw theme
 vim.cmd [[colorscheme moonfly]]
+

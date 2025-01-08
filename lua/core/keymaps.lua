@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 local opts = { noremap = true, silent = true }
 
 -- save file
-vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
+vim.keymap.set('n', '<M-s>', '<cmd> w <CR>', opts)
 
 --  Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -16,8 +16,8 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
-
-vim.keymap.set('n', '<C-q>', '<cmd> Ex <CR>', opts)
+-- alt + q goes to Ex mode
+vim.keymap.set('n', '<M-q>', '<cmd> Ex <CR>', opts)
 
 -- Find and center
 vim.keymap.set('n', 'n', 'nzzzv', opts)
@@ -40,3 +40,4 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
