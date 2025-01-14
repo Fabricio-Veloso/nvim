@@ -16,7 +16,7 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- alt + q exit's 
+-- alt + q exit's
 vim.keymap.set('n', '<M-q>', '<cmd> q <CR>', opts)
 
 -- Find and center
@@ -43,4 +43,5 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Go from the insetmode to normal mode with jj
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
+--vim.keymap.set('i', '<CapsLock>', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-c>', ':', { noremap = true, silent = false })

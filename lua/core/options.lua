@@ -1,5 +1,5 @@
- -- Make Line Numbers
-vim.wo.number = true 
+-- Make Line Numbers
+vim.wo.number = true
 
 -- Make relative line numbers
 vim.opt.relativenumber = true
@@ -17,7 +17,6 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.tabstop = 2       -- Define o número de espaços que um tab ocupa
-vim.opt.shiftwidth = 2    -- Define o número de espaços usados para cada nível de indentação
-vim.opt.expandtab = true  -- Converte tabs em espaços
-    
+vim.opt.tabstop = 2 -- Define o número de espaços que um tab ocupa
+vim.opt.shiftwidth = 2 -- Define o número de espaços usados para cada nível de indentação
+vim.opt.expandtab = true -- Converte tabs em espaços
