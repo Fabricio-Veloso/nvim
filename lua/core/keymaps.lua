@@ -45,3 +45,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 --vim.keymap.set('i', '<CapsLock>', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-c>', ':', { noremap = true, silent = false })
+
+-- move true buffers with < >
+vim.keymap.set('n', '>', ':bnext<CR>', { noremap = true, silent = true })
+-- Shift + , para o buffer anterior
+vim.keymap.set('n', '<', ':bprevious<CR>', { noremap = true, silent = true })

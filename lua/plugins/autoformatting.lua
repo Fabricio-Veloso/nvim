@@ -24,7 +24,7 @@ return {
       diagnostics.checkmake,
       formatting.prettier.with { filetypes = { 'js', 'ts', 'html', 'json', 'yaml', 'markdown' } },
       formatting.stylua,
-      formatting.shfmt.with { args = { '-i', '4' } },
+      formatting.shfmt.with { args = { '-i', '2' } },
       formatting.terraform_fmt,
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
       require 'none-ls.formatting.ruff_format',
