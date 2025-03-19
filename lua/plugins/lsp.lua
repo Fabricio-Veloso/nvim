@@ -199,6 +199,11 @@ return {
           },
         },
       },
+      omnisharp = {
+        cmd = { 'omnisharp' }, -- Certifique-se de que esse binário está instalado
+        filetypes = { 'cs', 'razor' }, -- Adiciona suporte para C# e Blazor
+        root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', '.git'),
+      },
     }
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
