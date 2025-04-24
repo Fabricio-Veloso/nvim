@@ -30,3 +30,21 @@ require('lazy').setup {
 
 -- seting moonflw theme
 vim.cmd [[colorscheme moonfly]]
+
+-- Usa Treesitter para folding baseado em sintaxe real
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- Remove o texto dentro dos folds (deixa só o símbolo de fold [+])
+vim.opt.foldtext = "''"
+vim.opt.fillchars = { fold = ' ' } -- remove os "tracinhos" feios do fold
+
+-- Abre todos os arquivos com os folds fechados (modo minimalista)
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = '*',
+  callback = function()
+    vim.schedule(function()
+      vim.cmd 'normal! zM' -- fecha todos os folds automaticamente
+    end)
+  end,
+})
