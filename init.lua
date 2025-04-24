@@ -26,6 +26,7 @@ require('lazy').setup {
   require 'plugins.which-key',
   require 'plugins.comment',
   require 'plugins.neogit',
+  require 'plugins.autopairs',
 }
 
 -- seting moonflw theme
@@ -35,8 +36,8 @@ vim.cmd [[colorscheme moonfly]]
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
--- Remove o texto dentro dos folds (deixa só o símbolo de fold [+])
-vim.opt.foldtext = "''"
+-- Mostra apenas a primeira linha dentro do fold (ex: def func():)
+vim.opt.foldtext = 'getline(v:foldstart)'
 vim.opt.fillchars = { fold = ' ' } -- remove os "tracinhos" feios do fold
 
 -- Abre todos os arquivos com os folds fechados (modo minimalista)
