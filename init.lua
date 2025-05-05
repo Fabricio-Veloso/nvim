@@ -25,8 +25,8 @@ require('lazy').setup {
   require 'plugins.autoformatting',
   require 'plugins.which-key',
   require 'plugins.comment',
-  require 'plugins.neogit',
   require 'plugins.autopairs',
+  require 'plugins.neogit',
 }
 
 -- seting moonflw theme
