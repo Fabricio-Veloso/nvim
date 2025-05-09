@@ -29,6 +29,7 @@ require('lazy').setup {
   require 'plugins.neogit',
   --  require 'plugins.nvim-ghost',
   require 'plugins.neoscroll',
+  require 'plugins.live-preview',
 }
 
 -- seting moonflw theme
