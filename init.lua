@@ -27,6 +27,7 @@ require('lazy').setup {
   require 'plugins.comment',
   require 'plugins.autopairs',
   require 'plugins.neogit',
+  require 'plugins.nvim-ghost',
 }
 
 -- seting moonflw theme
