@@ -1,13 +1,13 @@
 return {
   'NeogitOrg/neogit',
   dependencies = {
-    'nvim-lua/plenary.nvim', -- Requerido
+    'nvim-lua/plenary.nvim',  -- Requerido
     'sindrets/diffview.nvim', -- Opcional - Integração de Diff
 
     -- Apenas um desses é necessário.
     'nvim-telescope/telescope.nvim', -- Opcional
-    'ibhagwan/fzf-lua', -- Opcional
-    'echasnovski/mini.pick', -- Opcional
+    'ibhagwan/fzf-lua',              -- Opcional
+    'echasnovski/mini.pick',         -- Opcional
   },
   config = function()
     local neogit = require 'neogit'
@@ -273,8 +273,8 @@ return {
           ['b'] = 'Break',
           ['q'] = 'Close',
           ['<cr>'] = 'OpenCommit',
-          ['ll'] = 'MoveUp',
-          ['lk'] = 'MoveDown',
+          ['l'] = 'MoveUp',
+          ['k'] = 'MoveDown',
           ['<c-c><c-c>'] = 'Submit',
           ['<c-c><c-k>'] = 'Abort',
           ['[c'] = 'OpenOrScrollUp',
