@@ -20,7 +20,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
-    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -51,8 +51,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
       -- defaults = {
       mappings = {
         ['K'] = require('telescope.actions').move_selection_previous, -- move to prev result
-        ['J'] = require('telescope.actions').move_selection_next,     -- move to next result
-        ['l'] = require('telescope.actions').select_default,          -- open file
+        ['J'] = require('telescope.actions').move_selection_next, -- move to next result
+        ['l'] = require('telescope.actions').select_default, -- open file
       },
       -- },
       -- pickers = {}
@@ -85,6 +85,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
         search_dirs = { '~/.config/nvim/gloss' },
       }
     end, { desc = '[S]earch [G]lossário' })
+
+    vim.keymap.set('n', '<leader>fp', function()
+      local root = '/mnt/c/Users/fabriciov/Desktop/Fabricio/projects'
+      require('telescope.builtin').find_files {
+        search_dirs = { root },
+        prompt_title = '🔍 Projetos',
+        cwd = root,
+        path_display = { 'truncate' },
+      }
+    end, { desc = 'Buscar arquivos nos projetos' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
