@@ -2,16 +2,10 @@ return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+    { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', opts = {} },
-
-    -- Allows extra capabilities provided by nvim-cmp
     'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
@@ -157,6 +151,7 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = ensure_installed,
+      automatic_installation = true, -- essa linha deve ser adicionada
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -164,8 +159,7 @@ return {
           require('lspconfig')[server_name].setup(server)
         end,
       },
-    }
-    -- Instala ferramentas adicionais (como formatters)
+    } -- Instala ferramentas adicionais (como formatters)
     require('mason-tool-installer').setup {
       ensure_installed = {
         'stylua', -- Lua formatter
