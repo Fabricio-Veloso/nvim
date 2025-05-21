@@ -50,9 +50,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --
       -- defaults = {
       mappings = {
-        ['K'] = require('telescope.actions').move_selection_previous, -- move to prev result
-        ['J'] = require('telescope.actions').move_selection_next, -- move to next result
-        ['l'] = require('telescope.actions').select_default, -- open file
+        ['L'] = require('telescope.actions').move_selection_previous, -- move to prev result
+        ['K'] = require('telescope.actions').move_selection_next, -- move to next result
+        ['Ç'] = require('telescope.actions').select_default, -- open file
       },
       -- },
       -- pickers = {}
