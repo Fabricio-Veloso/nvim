@@ -5,7 +5,7 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = {} },
+    { 'j-hui/fidget.nvim',       opts = {} },
     'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
@@ -110,6 +110,11 @@ return {
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
+      csharp_ls = {
+        cmd = { vim.fn.stdpath 'data' .. '/mason/bin/csharp-ls' },
+        filetypes = { 'cs' },
+        root_dir = require('lspconfig.util').root_pattern('*.sln', '*.csproj'),
+      },
       lua_ls = {
         settings = {
           Lua = {
@@ -131,11 +136,6 @@ return {
           },
         },
       },
-      omnisharp = {
-        cmd = { 'omnisharp' }, -- verifique se está no PATH
-        filetypes = { 'cs', 'razor' },
-        root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', '.git'),
-      },
       yamlls = {},
       html = {},
       cssls = {},
@@ -143,7 +143,7 @@ return {
 
     local ensure_installed = {
       'lua_ls',
-      'omnisharp',
+      'csharp_ls',
       'yamlls',
       'html',
       'cssls',
