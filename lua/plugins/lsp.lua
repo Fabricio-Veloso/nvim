@@ -5,7 +5,7 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim',       opts = {} },
+    { 'j-hui/fidget.nvim', opts = {} },
     'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
@@ -149,9 +149,14 @@ return {
       'cssls',
     }
 
+    package.loaded['mason-lspconfig.features.automatic_enable'] = {
+      init = function() end,
+    }
+
     require('mason-lspconfig').setup {
+      -- hotfix do erro 'attempt to call field enable (a nil value)'
       ensure_installed = ensure_installed,
-      automatic_installation = true, -- essa linha deve ser adicionada
+      automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -159,10 +164,18 @@ return {
           require('lspconfig')[server_name].setup(server)
         end,
       },
-    } -- Instala ferramentas adicionais (como formatters)
+    }
+    -- Ativa manualmente o csharp_ls (fora do Mason)
+    require('lspconfig').csharp_ls.setup {
+      cmd = { '/home/fabriciov/.local/csharp-language-server/out/CSharpLanguageServer' },
+      filetypes = { 'cs' },
+      root_dir = require('lspconfig.util').root_pattern('*.csproj', '*.sln'),
+    }
+    -- Instala ferramentas adicionais (como formatters)
     require('mason-tool-installer').setup {
       ensure_installed = {
         'stylua', -- Lua formatter
+        'csharp_ls',
       },
     }
   end,
