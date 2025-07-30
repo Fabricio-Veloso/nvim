@@ -110,11 +110,6 @@ return {
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      csharp_ls = {
-        cmd = { vim.fn.stdpath 'data' .. '/mason/bin/csharp-ls' },
-        filetypes = { 'cs' },
-        root_dir = require('lspconfig.util').root_pattern('*.sln', '*.csproj'),
-      },
       lua_ls = {
         settings = {
           Lua = {
@@ -143,7 +138,6 @@ return {
 
     local ensure_installed = {
       'lua_ls',
-      'csharp_ls',
       'yamlls',
       'html',
       'cssls',
@@ -165,17 +159,10 @@ return {
         end,
       },
     }
-    -- Ativa manualmente o csharp_ls (fora do Mason)
-    require('lspconfig').csharp_ls.setup {
-      cmd = { '/home/fabriciov/.local/csharp-language-server/out/CSharpLanguageServer' },
-      filetypes = { 'cs' },
-      root_dir = require('lspconfig.util').root_pattern('*.csproj', '*.sln'),
-    }
     -- Instala ferramentas adicionais (como formatters)
     require('mason-tool-installer').setup {
       ensure_installed = {
         'stylua', -- Lua formatter
-        'csharp_ls',
       },
     }
   end,
