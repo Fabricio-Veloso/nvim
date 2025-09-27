@@ -38,7 +38,7 @@ require('lazy').setup {
   require 'plugins.typescript-tools',
   require 'plugins.alpha',
   require 'plugins.indent-blankLine',
-  require 'plugins.autoformatting',
+  --  require 'plugins.autoformatting',
   require 'plugins.which-key',
   require 'plugins.comment',
   require 'plugins.autopairs',
@@ -46,6 +46,7 @@ require('lazy').setup {
   --  require 'plugins.nvim-ghost',
   require 'plugins.neoscroll',
   require 'plugins.live-preview',
+  require 'plugins.roslyn'
 }
 
 -- seting moonflw theme
