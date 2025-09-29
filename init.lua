@@ -27,8 +27,7 @@ vim.g.clipboard = {
 vim.opt.clipboard:prepend { 'unnamed', 'unnamedplus' }
 
 require('lazy').setup {
-  require 'plugins.neotree',
-  require 'plugins.lualine',
+  require 'plugins.neotree', require 'plugins.lualine',
   require 'plugins.nerdy',
   require 'plugins.treesitter',
   require 'plugins.moonfly',
@@ -39,14 +38,15 @@ require('lazy').setup {
   require 'plugins.alpha',
   require 'plugins.indent-blankLine',
   --  require 'plugins.autoformatting',
-  require 'plugins.which-key',
   require 'plugins.comment',
   require 'plugins.autopairs',
   require 'plugins.neogit',
   --  require 'plugins.nvim-ghost',
   require 'plugins.neoscroll',
   require 'plugins.live-preview',
-  require 'plugins.roslyn'
+  require 'plugins.roslyn',
+  require ("plugins.dap"),
+  require 'plugins.which-key',
 }
 
 -- seting moonflw theme
