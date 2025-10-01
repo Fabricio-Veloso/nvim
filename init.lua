@@ -46,7 +46,7 @@ require('lazy').setup {
   require 'plugins.live-preview',
   require 'plugins.roslyn',
   require ("plugins.dap"),
-  require 'plugins.which-key',
+  require ('plugins.which-key'),
 }
 
 -- seting moonflw theme
