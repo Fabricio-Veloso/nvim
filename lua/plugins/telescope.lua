@@ -80,9 +80,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>sgg', function()
+      local home = vim.fn.expand('~')  -- pega a home do usuário corretamente no Windows e Linux
       require('telescope.builtin').find_files {
         prompt_title = '📘 Meu Glossário Neovim',
-        search_dirs = { '~/.config/nvim/gloss' },
+        search_dirs = { home .. '/AppData/Local/nvim/gloss' },
       }
     end, { desc = '[S]earch [G]lossário' })
 
