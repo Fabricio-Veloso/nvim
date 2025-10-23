@@ -1,6 +1,17 @@
 require 'core.options'
 require 'core.keymaps'
--- NOTE:  lazy set-up
+-- Configura o shell para PowerShell (Windows)
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  local shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+  vim.o.shell = shell
+  vim.o.shellcmdflag = '-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';$PSStyle.OutputRendering=\'plaintext\';Remove-Item Alias:tee -ErrorAction SilentlyContinue'
+  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+  vim.o.shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
+end
+
+-- NOTE: lazy.nvim set-up
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -8,10 +19,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     error('Error cloning lazy.nvim:\n' .. out)
   end
-end ---@diagnostic disable-next-line: undefined-field
+end
+
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- clip board with yank
+-- Clipboard integration
 vim.g.clipboard = {
   name = 'win32yank-wsl',
   copy = {
@@ -26,46 +39,63 @@ vim.g.clipboard = {
 }
 vim.opt.clipboard:prepend { 'unnamed', 'unnamedplus' }
 
+-- Lazy.nvim plugins
 require('lazy').setup {
-  require 'plugins.neotree', require 'plugins.lualine',
-  require 'plugins.nerdy',
-  require 'plugins.treesitter',
-  require 'plugins.moonfly',
-  require 'plugins.telescope',
-  require 'plugins.lsp',
-  require 'plugins.autocompletion',
-  require 'plugins.typescript-tools',
-  require 'plugins.alpha',
-  require 'plugins.indent-blankLine',
-  --  require 'plugins.autoformatting',
-  require 'plugins.comment',
-  require 'plugins.autopairs',
-  require 'plugins.neogit',
-  --  require 'plugins.nvim-ghost',
-  require 'plugins.neoscroll',
-  require 'plugins.live-preview',
-  require 'plugins.roslyn',
-  require ("plugins.dap"),
-  require ('plugins.which-key'),
+  -- Plugins locais
+  require("plugins.dap"),
+  require("plugins.lf"),
+  require('plugins.neotree'),
+  require('plugins.lualine'),
+  require('plugins.nerdy'),
+  require('plugins.treesitter'),
+  require('plugins.moonfly'),
+  require('plugins.telescope'),
+  require('plugins.lsp'),
+  require('plugins.autocompletion'),
+  require('plugins.typescript-tools'),
+  require('plugins.alpha'),
+  require('plugins.indent-blankLine'),
+  -- require('plugins.autoformatting'), -- opcional
+  require('plugins.comment'),
+  require('plugins.autopairs'),
+  -- require('plugins.nvim-ghost'),   -- opcional
+  require('plugins.neoscroll'),
+  require('plugins.live-preview'),
+  require('plugins.roslyn'),
+  require('plugins.which-key'),
+  require('plugins.telescope-fzf-native'),
+  -- require('plugins.avante'),
+  require('plugins.code-companion'),
+  require('plugins.lsp-signature'),
+  require('plugins.fire-nvim'),
+  require('plugins.mcphub-nvim'),
+  require('plugins.neogit'),
 }
 
--- seting moonflw theme
+
+
+-- Tema Moonfly
+vim.opt.termguicolors = true
 vim.cmd [[colorscheme moonfly]]
 
--- Usa Treesitter para folding baseado em sintaxe real
+-- Folding com Treesitter
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
--- Mostra apenas a primeira linha dentro do fold (ex: def func():)
 vim.opt.foldtext = 'getline(v:foldstart)'
-vim.opt.fillchars = { fold = ' ' } -- remove os "tracinhos" feios do fold
+vim.opt.fillchars = { fold = ' ' }
 
--- Abre todos os arquivos com os folds fechados (modo minimalista)
+-- Fecha todos os folds ao abrir arquivo
 vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = '*',
   callback = function()
     vim.schedule(function()
-      vim.cmd 'normal! zM' -- fecha todos os folds automaticamente
+      vim.cmd 'normal! zM'
     end)
   end,
 })
+
+-- Remove opacidade do Neovim
+vim.cmd [[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NonText guibg=NONE ctermbg=NONE
+]]
