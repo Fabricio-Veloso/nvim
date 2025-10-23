@@ -1,8 +1,8 @@
 return {
-  -- LSP Base
+  -- Base LSP
   "neovim/nvim-lspconfig",
   dependencies = {
-    -- Mason: instala LSPs, linters, formatadores
+    -- Mason: gerenciador de LSPs, linters, formatadores
     {
       "williamboman/mason.nvim",
       opts = {
@@ -19,11 +19,26 @@ return {
         },
       },
     },
-    "williamboman/mason-lspconfig.nvim", -- integração LSP oficial
-    "WhoIsSethDaniel/mason-tool-installer.nvim", -- instala ferramentas adicionais
+
+    -- Integração Mason + LSP
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = { "lua_ls", "yamlls", "html", "cssls" },
+        automatic_installation = true,
+      },
+    },
+
+    -- Instala ferramentas adicionais (formatadores/linters)
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      opts = { ensure_installed = { "stylua" } },
+    },
+
     { "j-hui/fidget.nvim", opts = {} }, -- status LSP
     "hrsh7th/cmp-nvim-lsp", -- integração com completions
   },
+
   config = function()
     -------------------------------------------------------------------------
     -- Keymaps LSP
@@ -64,7 +79,7 @@ return {
     end
 
     -------------------------------------------------------------------------
-    -- Capabilities nvim-cmp
+    -- Capabilities do nvim-cmp
     -------------------------------------------------------------------------
     local capabilities = vim.tbl_deep_extend(
       "force",
@@ -73,7 +88,7 @@ return {
     )
 
     -------------------------------------------------------------------------
-    -- Servidores oficiais (LSPConfig)
+    -- Servidores configurados manualmente
     -------------------------------------------------------------------------
     local servers = {
       lua_ls = {
@@ -90,21 +105,22 @@ return {
       cssls = {},
     }
 
+    -------------------------------------------------------------------------
+    -- Compatibilidade com Neovim 0.11+ (vim.lsp.config)
+    -- e fallback para versões anteriores
+    -------------------------------------------------------------------------
+    local setup = vim.lsp.config or function(server, cfg)
+      require("lspconfig")[server].setup(cfg)
+    end
+
     for name, opts in pairs(servers) do
       opts.capabilities = vim.tbl_deep_extend("force", {}, capabilities, opts.capabilities or {})
-      require("lspconfig")[name].setup(opts)
+      setup(name, opts)
     end
 
     -------------------------------------------------------------------------
     -- Observação: Roslyn e Razor agora são carregados via plugin separado:
     -- ~/.config/nvim/lua/plugins/roslyn.lua
     -------------------------------------------------------------------------
-
-    -------------------------------------------------------------------------
-    -- Mason Tool Installer (linters/formatters)
-    -------------------------------------------------------------------------
-    require("mason-tool-installer").setup {
-      ensure_installed = { "stylua" },
-    }
   end,
 }
