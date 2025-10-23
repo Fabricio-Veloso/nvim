@@ -157,6 +157,10 @@ return { -- Autocompletion
         { name = 'buffer' },
         { name = 'path' },
       },
+      performance = {
+          max_view_entries = 5, -- 👈 mostra no máximo 5 sugestões na lista
+        },
+
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
