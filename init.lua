@@ -1,15 +1,38 @@
 require 'core.options'
 require 'core.keymaps'
--- Configura o shell para PowerShell (Windows)
-if vim.loop.os_uname().sysname == "Windows_NT" then
-  local shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+-- =========================
+-- Configuração de shell segura para Neovim
+-- Funciona no Windows (PowerShell 5.1 ou 7+) e ignora em Linux/macOS
+-- =========================
+
+local uname = vim.loop.os_uname().sysname
+
+if uname == "Windows_NT" then
+  local shell = nil
+
+  -- Detecta PowerShell 7+ (pwsh) ou fallback para PowerShell 5.1
+  if vim.fn.executable("pwsh") == 1 then
+    shell = "pwsh"
+  elseif vim.fn.executable("powershell") == 1 then
+    shell = "powershell"
+  else
+    shell = "cmd"
+  end
+
   vim.o.shell = shell
-  vim.o.shellcmdflag = '-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';$PSStyle.OutputRendering=\'plaintext\';Remove-Item Alias:tee -ErrorAction SilentlyContinue'
-  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-  vim.o.shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-  vim.o.shellquote = ''
-  vim.o.shellxquote = ''
+
+  -- shellcmdflag mínimo e seguro
+  vim.o.shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command"
+
+  -- redirecionamento de saída e pipe padrão
+  vim.o.shellredir  = "2>&1 | Out-File %s; exit $LastExitCode"
+  vim.o.shellpipe   = "2>&1 | tee %s; exit $LastExitCode"
+
+  -- evita problemas de aspas
+  vim.o.shellquote  = ""
+  vim.o.shellxquote = ""
 end
+
 
 -- NOTE: lazy.nvim set-up
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
