@@ -20,13 +20,14 @@ return {
     local py_builds = require("plugins.which-key.py")
     local js_builds = require("plugins.which-key.js")
     local ts_builds = require("plugins.which-key.ts")
+    local lua_builds = require("plugins.which-key.lua")
 
-    -- combina todas as configurações (merge profundo)
     local all_builds = vim.tbl_deep_extend("force",
       cs_builds.filetype_builds or {},
       py_builds.filetype_builds or {},
       js_builds.filetype_builds or {},
-      ts_builds.filetype_builds or {}
+      ts_builds.filetype_builds or {},
+      lua_builds.filetype_builds or {}
     )
 
     -- tabela para evitar registrar múltiplas vezes

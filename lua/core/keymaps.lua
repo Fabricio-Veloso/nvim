@@ -17,7 +17,7 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- alt + q exit's
-vim.keymap.set('n', '<M-q>', '<cmd> q <CR>', opts)
+vim.keymap.set('n', '<M-q>', '<cmd> exit <CR>', opts)
 
 -- Find and center
 vim.keymap.set('n', 'n', 'nzzzv', opts)
@@ -80,7 +80,7 @@ vim.keymap.set("n", "<A-d>", function()
     -- Caso com mais de um buffer
     vim.cmd("wa")       -- Salva todos
     vim.cmd("bnext")    -- Vai para o próximo
-    vim.cmd("bd #")     -- Fecha o anterior
+    vim.cmd("bd! #")     -- Fecha o anterior
   else
     -- Caso com apenas um buffer
     vim.cmd("wa")       -- Salva alterações
