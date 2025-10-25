@@ -58,18 +58,17 @@ require('lazy').setup {
   -- require('plugins.autoformatting'), -- opcional
   require('plugins.comment'),
   require('plugins.autopairs'),
-  -- require('plugins.nvim-ghost'),   -- opcional
   require('plugins.neoscroll'),
-  require('plugins.live-preview'),
   require('plugins.roslyn'),
   require('plugins.which-key'),
   require('plugins.telescope-fzf-native'),
-  -- require('plugins.avante'),
+  -- require('plugins.avante'), if new good features come out
   require('plugins.code-companion'),
   require('plugins.lsp-signature'),
   require('plugins.fire-nvim'),
   require('plugins.mcphub-nvim'),
   require('plugins.neogit'),
+  require('plugins.markdown-preview')
 }
 
 
@@ -77,6 +76,8 @@ require('lazy').setup {
 -- Tema Moonfly
 vim.opt.termguicolors = true
 vim.cmd [[colorscheme moonfly]]
+
+-- Automations
 
 -- Folding com Treesitter
 vim.opt.foldmethod = 'expr'
