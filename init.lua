@@ -1,9 +1,5 @@
 require 'core.options'
 require 'core.keymaps'
--- =========================
--- Configuração de shell segura para Neovim
--- Funciona no Windows (PowerShell 5.1 ou 7+) e ignora em Linux/macOS
--- =========================
 
 local uname = vim.loop.os_uname().sysname
 
