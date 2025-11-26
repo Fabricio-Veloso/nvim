@@ -79,7 +79,7 @@ vim.keymap.set("n", "<A-d>", function()
   if #buffers > 1 then
     -- Caso com mais de um buffer
     vim.cmd("wa")       -- Salva todos
-    vim.cmd("bnext")    -- Vai para o próximo
+    vim.cmd("bprevious")    -- Vai para o anterior
     vim.cmd("bd! #")     -- Fecha o anterior
   else
     -- Caso com apenas um buffer
