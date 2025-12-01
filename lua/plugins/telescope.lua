@@ -23,6 +23,38 @@ return { -- Fuzzy Finder (files, lsp, etc)
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
+       
+    -- ✨ 1. Função para pegar o root atual do Neo-tree (ou o cwd)
+    local function get_neotree_root()
+      -- tenta obter o estado do neo-tree, mas sem depender dele estar ativo
+      local ok, fs = pcall(require, "neo-tree.sources.filesystem")
+      if ok then
+        local state_ok, state = pcall(fs.get_state)
+        if state_ok and state and state.path and state.path ~= "" then
+          return state.path
+        end
+      end
+
+      -- fallback sempre válido
+      return vim.loop.cwd()
+    end
+
+    -- ✨ 2. Função usada pelo Telescope para exibir paths relativos ao root
+    local function relative_path_display(_, path)
+      local root = get_neotree_root()
+      if not root or root == "" then
+        root = vim.loop.cwd()
+      end
+
+      -- usa o caminho relativo ao cwd como base
+      local rel = vim.fn.fnamemodify(path, ":.")
+
+      -- remove o prefixo do root real (neotree ou cwd)
+      rel = rel:gsub("^" .. vim.pesc(root) .. "/", "")
+
+      return rel
+    end
+
     -- Telescope is a fuzzy finder that comes with a lot of different things that
     -- it can fuzzy find! It's more than just a "file finder", it can search
     -- many different aspects of Neovim, your workspace, LSP, and more!
@@ -44,11 +76,35 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    -- Telescope is a fuzzy finder that comes with a lot of different things that
+    -- it can fuzzy find! It's more than just a "file finder", it can search
+    -- many different aspects of Neovim, your workspace, LSP, and more!
+    --
+    -- The easiest way to use Telescope, is to start by doing something like:
+    --  :Telescope help_tags
+    --
+    -- After running this command, a window will open up and you're able to
+    -- type in the prompt window. You'll see a list of `help_tags` options and
+    -- a corresponding preview of the help.
+    --
+    -- Two important keymaps to use while in Telescope are:
+    --  - Insert mode: <c-/>
+    --  - Normal mode: ?
+    --
+    -- This opens a window that shows you all of the keymaps for the current
+    -- Telescope picker. This is really useful to discover what Telescope can
+    -- do as well as how to actually do it!
+
+    -- [[ Configure Telescope ]]
+    -- See `:help telescope` and `:help telescope.setup()`
+
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
-      -- defaults = {
+      defaults = {
+        path_display = relative_path_display,
+      },
       mappings = {
         ['L'] = require('telescope.actions').move_selection_previous, -- move to prev result
         ['K'] = require('telescope.actions').move_selection_next, -- move to next result
