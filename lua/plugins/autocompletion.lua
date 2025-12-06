@@ -144,7 +144,7 @@ return { -- Autocompletion
           else
             fallback()
           end
-        end, { 'i', 's' }),
+        end, { 'p', 's' }),
       },
       sources = {
         {

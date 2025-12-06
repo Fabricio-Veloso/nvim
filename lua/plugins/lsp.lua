@@ -12,10 +12,7 @@ return {
         },
         ensure_installed = {
           "lua-language-server",
-          "yamlls",
-          "html-lsp",
-          "css-lsp",
-          "stylua",
+          -- "stylua",
         },
       },
     },
@@ -28,11 +25,10 @@ return {
         automatic_installation = true,
       },
     },
-
     -- Instala ferramentas adicionais (formatadores/linters)
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      opts = { ensure_installed = { "stylua" } },
+      opts = { ensure_installed = {} },
     },
 
     { "j-hui/fidget.nvim", opts = {} }, -- status LSP
@@ -94,9 +90,16 @@ return {
       lua_ls = {
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT" },
-            workspace = { checkThirdParty = false },
-            diagnostics = { disable = { "missing-fields" } },
+            completion = {
+              callSnippet = "Replace",
+            },
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              checkThirdParty = false,
+            },
+            telemetry = { enable = false },
           },
         },
       },
