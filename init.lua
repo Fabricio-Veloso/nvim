@@ -1,6 +1,5 @@
 require 'core.options'
 require 'core.keymaps'
-
 local uname = vim.loop.os_uname().sysname
 
 if uname == "Windows_NT" then
@@ -28,7 +27,6 @@ if uname == "Windows_NT" then
   vim.o.shellquote  = ""
   vim.o.shellxquote = ""
 end
-
 
 -- NOTE: lazy.nvim set-up
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -61,6 +59,7 @@ vim.opt.clipboard:prepend { 'unnamed', 'unnamedplus' }
 -- Lazy.nvim plugins
 require('lazy').setup {
   -- Plugins locais
+  require("plugins.lazy-dev"),
   require("plugins.dap"),
   require("plugins.lf"),
   require('plugins.neotree'),
@@ -82,15 +81,13 @@ require('lazy').setup {
   require('plugins.which-key'),
   require('plugins.telescope-fzf-native'),
   -- require('plugins.avante'), if new good features come out
-  require('plugins.code-companion'),
+  -- require('plugins.code-companion'),
   require('plugins.lsp-signature'),
   require('plugins.fire-nvim'),
   require('plugins.mcphub-nvim'),
   require('plugins.neogit'),
   require('plugins.markdown-preview')
 }
-
-
 
 -- Tema Moonfly
 vim.opt.termguicolors = true
