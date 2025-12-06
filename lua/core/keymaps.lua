@@ -41,17 +41,21 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- quick fix keymaps
+vim.keymap.set("n","<A-.>",":cnext<CR>")
+vim.keymap.set("n","<A-,>",":cprev<CR>")
+
 -- Mapear Shift+K (ou seja, K maiúsculo) para <Esc> no modo inserção
 vim.keymap.set('i', 'K', '<Esc>', { noremap = true, silent = true })
 
 --vim.keymap.set('i', '<CapsLock>', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-c>', ':', { noremap = true, silent = false })
 
--- Alt + . para o próximo buffer
-vim.keymap.set('n', '<A-.>', ':bnext<CR>', { noremap = true, silent = true })
-
--- Alt + , para o buffer anterior
-vim.keymap.set('n', '<A-,>', ':bprevious<CR>', { noremap = true, silent = true })
+-- -- Alt + . para o próximo buffer
+-- vim.keymap.set('n', '<A-.>', ':bnext<CR>', { noremap = true, silent = true })
+--
+-- -- Alt + , para o buffer anterior
+-- vim.keymap.set('n', '<A-,>', ':bprevious<CR>', { noremap = true, silent = true })
 
 -- Reamps for ABNT 2 60% keyboard
 vim.keymap.set('n', 'j', 'h', { noremap = true, silent = true })
@@ -72,7 +76,7 @@ vim.keymap.set('o', 'ç', 'l', { noremap = true, silent = true })
 -- to travel to active buffer directory
 vim.keymap.set('n', '<leader>f', ':Neotree reveal<CR>')
 
--- Fecha o buffer atual e vai para o próximo
+-- Fecha e salva o buffer atual e vai para o próximo
 vim.keymap.set("n", "<A-d>", function()
   local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 
@@ -102,3 +106,8 @@ vim.keymap.set("n", "<A-d>", function()
     end
   end
 end, { desc = "Fechar buffer atual rapidamente" })
+
+vim.api.nvim_create_user_command("ShowMRU", function()
+  print(vim.inspect(mru))
+end, {})
+
