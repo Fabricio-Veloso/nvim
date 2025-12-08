@@ -60,6 +60,7 @@ vim.opt.clipboard:prepend { 'unnamed', 'unnamedplus' }
 require('lazy').setup {
   -- Plugins locais
   require("plugins.lazy-dev"),
+  require('plugins.notify-nvim'),
   require("plugins.dap"),
   require("plugins.lf"),
   require('plugins.neotree'),

@@ -4,10 +4,22 @@ return{
     local notify = require("notify")
     notify.setup({
       -- Aqui você pode colocar configs personalizadas
-      -- exemplo: background_colour = "#000000",
+      stages = "fade_in_slide_out",
+      top_down = true,
+      minimum_width = 50,
+      background_colour = "#000000",
+      level = 2,
+      timeout = 5,
+      fps = 60,
+      icons = {
+        DEBUG = "",
+        ERROR = "",
+        INFO = "",
+        TRACE = "✎",
+        WARN = ""
+      },
+      render = "simple",
     })
-
-    -- opcional: substituir o sistema de notify padrão do Neovim
     vim.notify = notify
   end
 }
