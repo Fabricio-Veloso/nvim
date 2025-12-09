@@ -87,9 +87,10 @@ require('lazy').setup {
   require('plugins.fire-nvim'),
   require('plugins.mcphub-nvim'),
   require('plugins.neogit'),
-  require('plugins.markdown-preview')
+  require('plugins.markdown-preview'),
 }
 
+require('make')
 -- Tema Moonfly
 vim.opt.termguicolors = true
 vim.cmd [[colorscheme moonfly]]
@@ -114,6 +115,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 
 -- Remove opacidade do Neovim
 vim.cmd [[
-  hi Normal guibg=NONE ctermbg=NONE
-  hi NonText guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
 ]]

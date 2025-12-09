@@ -107,7 +107,7 @@ vim.keymap.set("n", "<A-d>", function()
   end
 end, { desc = "Fechar buffer atual rapidamente" })
 
-vim.api.nvim_create_user_command("ShowMRU", function()
-  print(vim.inspect(mru))
-end, {})
 
+vim.keymap.set("n", "<leader>mc", function()
+  require('make').exec()
+end, { desc = "Executar Make inteligente" })

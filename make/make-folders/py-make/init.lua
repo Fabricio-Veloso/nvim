@@ -1,2 +1,0 @@
--- chama o python-identifiers
--- chama a execução da rotina de make selecionada pelo usuário?
