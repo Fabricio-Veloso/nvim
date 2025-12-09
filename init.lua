@@ -88,6 +88,7 @@ require('lazy').setup {
   require('plugins.mcphub-nvim'),
   require('plugins.neogit'),
   require('plugins.markdown-preview'),
+  require('plugins.auto-session')
 }
 
 require('make')
