@@ -77,7 +77,7 @@ require('lazy').setup {
   -- require('plugins.autoformatting'), -- opcional
   require('plugins.comment'),
   require('plugins.autopairs'),
-  require('plugins.neoscroll'),
+  -- require('plugins.neoscroll'),
   require('plugins.roslyn'),
   require('plugins.which-key'),
   require('plugins.telescope-fzf-native'),
