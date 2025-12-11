@@ -17,7 +17,7 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- alt + q exit's
-vim.keymap.set('n', '<M-q>', '<cmd> exit <CR>', opts)
+vim.keymap.set('n', '<M-q>', '<cmd> quitall <CR>', opts)
 
 -- Find and center
 vim.keymap.set('n', 'n', 'nzzzv', opts)
