@@ -85,7 +85,7 @@ require('lazy').setup {
   -- require('plugins.code-companion'),
   require('plugins.lsp-signature'),
   require('plugins.fire-nvim'),
-  require('plugins.mcphub-nvim'),
+  -- require('plugins.mcphub-nvim'),
   require('plugins.neogit'),
   require('plugins.markdown-preview'),
   require('plugins.auto-session')
