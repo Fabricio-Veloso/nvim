@@ -70,6 +70,7 @@ require('lazy').setup {
   require('plugins.moonfly'),
   require('plugins.telescope'),
   require('plugins.lsp'),
+  require('plugins.friendly-snipets'),
   require('plugins.autocompletion'),
   require('plugins.typescript-tools'),
   require('plugins.alpha'),
@@ -97,6 +98,9 @@ vim.opt.termguicolors = true
 vim.cmd [[colorscheme moonfly]]
 
 -- Automations
+
+-- activate snipets
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Folding com Treesitter
 vim.opt.foldmethod = 'expr'
