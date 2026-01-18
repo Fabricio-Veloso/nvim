@@ -74,7 +74,7 @@ vim.keymap.set('o', 'l', 'k', { noremap = true, silent = true })
 vim.keymap.set('o', 'ç', 'l', { noremap = true, silent = true })
 
 -- to travel to active buffer directory
-vim.keymap.set('n', '<leader>f', ':Neotree reveal<CR>')
+-- vim.keymap.set('n', '<leader>f', ':Neotree reveal<CR>')
 
 -- Fecha e salva o buffer atual e vai para o próximo
 vim.keymap.set("n", "<A-d>", function()

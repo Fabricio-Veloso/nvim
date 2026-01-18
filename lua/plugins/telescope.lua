@@ -134,7 +134,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>f', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>sgg', function()
       local home = vim.fn.expand('~')  -- pega a home do usuário corretamente no Windows e Linux
       require('telescope.builtin').find_files {
@@ -143,15 +143,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
       }
     end, { desc = '[S]earch [G]lossário' })
 
-    vim.keymap.set('n', '<leader>fp', function()
-      local root = '/mnt/c/Users/fabriciov/Desktop/Fabricio/projects'
-      require('telescope.builtin').find_files {
-        search_dirs = { root },
-        prompt_title = '🔍 Projetos',
-        cwd = root,
-        path_display = { 'truncate' },
-      }
-    end, { desc = 'Buscar arquivos nos projetos' })
+    -- vim.keymap.set('n', '<leader>fp', function()
+    --   local root = '/mnt/c/Users/fabriciov/Desktop/Fabricio/projects'
+    --   require('telescope.builtin').find_files {
+    --     search_dirs = { root },
+    --     prompt_title = '🔍 Projetos',
+    --     cwd = root,
+    --     path_display = { 'truncate' },
+    --   }
+    -- end, { desc = 'Buscar arquivos nos projetos' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()

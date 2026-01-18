@@ -62,7 +62,7 @@ require('lazy').setup {
   require("plugins.lazy-dev"),
   require('plugins.notify-nvim'),
   require("plugins.dap"),
-  require("plugins.lf"),
+  -- require("plugins.lf"),
   require('plugins.neotree'),
   require('plugins.lualine'),
   require('plugins.nerdy'),
