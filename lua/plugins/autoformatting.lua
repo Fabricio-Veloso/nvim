@@ -20,6 +20,7 @@ return {
     }
 
     local sources = {
+      null_ls.builtins.diagnostics.solhint,
       formatting.prettier.with {
         prefer_local = 'node_modules/.bin',
         filetypes = { 'solidity', 'javascript', 'typescript', 'json', 'yaml', 'markdown', 'html' },
