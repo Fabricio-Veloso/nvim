@@ -42,8 +42,8 @@ vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- quick fix keymaps
-vim.keymap.set("n","<A-.>",":cnext<CR>")
-vim.keymap.set("n","<A-,>",":cprev<CR>")
+vim.keymap.set('n', '<A-.>', ':cnext<CR>')
+vim.keymap.set('n', '<A-,>', ':cprev<CR>')
 
 -- Mapear Shift+K (ou seja, K maiúsculo) para <Esc> no modo inserção
 vim.keymap.set('i', 'K', '<Esc>', { noremap = true, silent = true })
@@ -77,20 +77,20 @@ vim.keymap.set('o', 'ç', 'l', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>f', ':Neotree reveal<CR>')
 
 -- Fecha e salva o buffer atual e vai para o próximo
-vim.keymap.set("n", "<A-d>", function()
-  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+vim.keymap.set('n', '<A-d>', function()
+  local buffers = vim.fn.getbufinfo { buflisted = 1 }
 
   if #buffers > 1 then
     -- Caso com mais de um buffer
-    vim.cmd("wa")       -- Salva todos
-    vim.cmd("bprevious")    -- Vai para o anterior
-    vim.cmd("bd! #")     -- Fecha o anterior
+    vim.cmd 'wa' -- Salva todos
+    vim.cmd 'bprevious' -- Vai para o anterior
+    vim.cmd 'bd! #' -- Fecha o anterior
   else
     -- Caso com apenas um buffer
-    vim.cmd("wa")       -- Salva alterações
+    vim.cmd 'wa' -- Salva alterações
     local current_buf = vim.api.nvim_get_current_buf()
 
-    vim.cmd("enew")     -- Cria um novo buffer vazio
+    vim.cmd 'enew' -- Cria um novo buffer vazio
     local new_buf = vim.api.nvim_get_current_buf()
 
     -- Deleta o antigo buffer
@@ -99,15 +99,17 @@ vim.keymap.set("n", "<A-d>", function()
     end
 
     -- Foca no Neotree se disponível
-    if pcall(vim.cmd, "Neotree reveal") then
+    if pcall(vim.cmd, 'Neotree reveal') then
       -- Se o Neotree estiver instalado, abre ou foca
     else
-      vim.notify("Neo-tree não disponível.", vim.log.levels.INFO)
+      vim.notify('Neo-tree não disponível.', vim.log.levels.INFO)
     end
   end
-end, { desc = "Fechar buffer atual rapidamente" })
+end, { desc = 'Fechar buffer atual rapidamente' })
 
-
-vim.keymap.set("n", "<leader>mc", function()
+vim.keymap.set('n', '<leader>mc', function()
   require('make').exec()
-end, { desc = "Executar Make inteligente" })
+end, { desc = 'Executar Make inteligente' })
+
+-- keymap para sair do modo terminal mais facilmente.
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { silent = true })
