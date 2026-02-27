@@ -7,11 +7,10 @@ return {
   config = function()
     local null_ls = require 'null-ls'
     local formatting = null_ls.builtins.formatting
-    local diagnostics = null_ls.builtins.diagnostics
 
     require('mason-null-ls').setup {
       ensure_installed = {
-        'prettier', -- ts/js formatter
+        'prettier',
         'stylua',
         'eslint_d',
         'shfmt',
@@ -20,23 +19,35 @@ return {
     }
 
     local sources = {
-      null_ls.builtins.diagnostics.solhint,
+      -- Prettier geral (HTML incluído) - SEM plugin solidity
       formatting.prettier.with {
         prefer_local = 'node_modules/.bin',
-        filetypes = { 'solidity', 'javascript', 'typescript', 'json', 'yaml', 'markdown', 'html' },
+        filetypes = {
+          'html',
+          'css',
+          'javascript',
+          'typescript',
+          'json',
+          'yaml',
+          'markdown',
+        },
+      },
+
+      -- Prettier só para Solidity (COM plugin)
+      formatting.prettier.with {
+        prefer_local = 'node_modules/.bin',
+        filetypes = { 'solidity' },
         extra_args = { '--plugin=prettier-plugin-solidity' },
       },
+
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '2' } },
-      -- formatting.terraform_fmt, -- remova se não usa
-      -- require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      -- require('none-ls.formatting.ruff_format'),
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
     null_ls.setup {
-      debug = true, -- por enquanto, pra enxergar qualquer erro no log
+      debug = true,
       sources = sources,
       on_attach = function(client, bufnr)
         if client.supports_method 'textDocument/formatting' then
